@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubscribersTable extends Migration
+class CreateMarketStateTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,15 @@ class CreateSubscribersTable extends Migration
      */
     public function up()
     {
-        Schema::create('subscribers', function (Blueprint $table) {
+        Schema::create('market_state', function (Blueprint $table) {
             $table->id();
-            $table->string('email')->unique();
-            $table->decimal('price');
+            $table->decimal('mid');
+            $table->decimal('bid');
+            $table->decimal('last_price');
+            $table->decimal('low');
+            $table->decimal('high');
+            $table->decimal('volume');
+
             $table->timestamps();
         });
     }
@@ -28,6 +33,6 @@ class CreateSubscribersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subscribers');
+        Schema::dropIfExists('market_state');
     }
 }
