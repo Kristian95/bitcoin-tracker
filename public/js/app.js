@@ -5317,7 +5317,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       form: {
-        price: '',
+        price_limit: '',
         email: ''
       },
       errors: {},
@@ -5405,28 +5405,28 @@ var render = function render() {
     staticClass: "form-group"
   }, [_c("label", {
     attrs: {
-      "for": "price"
+      "for": "price_limit"
     }
-  }, [_vm._v("Price")]), _vm._v(" "), _c("input", {
+  }, [_vm._v("Price Limit")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: _vm.form.price,
-      expression: "form.price"
+      value: _vm.form.price_limit,
+      expression: "form.price_limit"
     }],
     staticClass: "form-control",
     attrs: {
       type: "number",
       step: "any",
-      placeholder: "Enter price"
+      placeholder: "Enter price limit"
     },
     domProps: {
-      value: _vm.form.price
+      value: _vm.form.price_limit
     },
     on: {
       input: function input($event) {
         if ($event.target.composing) return;
-        _vm.$set(_vm.form, "price", $event.target.value);
+        _vm.$set(_vm.form, "price_limit", $event.target.value);
       }
     }
   })]), _vm._v(" "), _c("div", {

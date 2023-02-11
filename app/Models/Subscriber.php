@@ -15,6 +15,6 @@ class Subscriber extends Model
      */
     protected $fillable = [
         'email',
-        'price',
+        'price_limit',
     ];
 }

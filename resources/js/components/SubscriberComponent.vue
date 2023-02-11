@@ -12,8 +12,8 @@
         </div>
         <form @submit.prevent="subscribe">
             <div class="form-group">
-                <label for="price">Price</label>
-                <input type="number" step="any" class="form-control" placeholder="Enter price" v-model="form.price">
+                <label for="price_limit">Price Limit</label>
+                <input type="number" step="any" class="form-control" placeholder="Enter price limit" v-model="form.price_limit">
             </div>
             <div class="form-group">
                 <label for="emailAdress">Email address</label>
@@ -28,7 +28,7 @@ export default {
     data () {
         return {
             form: {
-                price: '',
+                price_limit: '',
                 email: ''
             },
             errors: {},

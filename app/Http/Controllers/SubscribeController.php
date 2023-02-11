@@ -24,7 +24,8 @@ class SubscribeController extends Controller
 
             return response()->json(['success' => true]);
         } catch (Exception $exception) {
-            Log::error($$exception);
+            Log::error($exception);
+            return response()->json(['success' => false]);
         }
     }
 }
