@@ -17,6 +17,7 @@ class CreateMarketStateTable extends Migration
             $table->id();
             $table->decimal('mid');
             $table->decimal('bid');
+            $table->decimal('ask');
             $table->decimal('last_price');
             $table->decimal('low');
             $table->decimal('high');
