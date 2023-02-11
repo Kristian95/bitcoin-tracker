@@ -5319,12 +5319,28 @@ __webpack_require__.r(__webpack_exports__);
       form: {
         price: '',
         email: ''
-      }
+      },
+      errors: {},
+      success: false
     };
   },
   methods: {
     subscribe: function subscribe() {
-      axios.post('/subscribe').then(function (response) {})["catch"](function (error) {});
+      var _this = this;
+      axios.post('/subscribe', this.form).then(function (response) {
+        _this.errors = {};
+        _this.success = response.data.success;
+      })["catch"](function (error) {
+        _this.errors = error.response.data.errors;
+        _this.success = false;
+      })["finally"](function () {
+        _this.clearForm(_this.form);
+      });
+    },
+    clearForm: function clearForm(form) {
+      Object.keys(form).forEach(function (key, index) {
+        form[key] = '';
+      });
     }
   }
 });
@@ -5346,7 +5362,39 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("form", {
+  return _c("div", [_c("div", {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: _vm.success && !Object.keys(_vm.errors).length,
+      expression: "success && !Object.keys(errors).length"
+    }],
+    staticClass: "alert alert-success",
+    attrs: {
+      role: "alert"
+    }
+  }, [_vm._v("\n        Successfully send\n    ")]), _vm._v(" "), _c("div", {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: Object.keys(_vm.errors).length && !_vm.success,
+      expression: "Object.keys(errors).length && !success"
+    }],
+    staticClass: "alert alert-danger",
+    attrs: {
+      role: "alert"
+    }
+  }, _vm._l(_vm.errors, function (errorArray, imdex) {
+    return _c("div", {
+      key: imdex
+    }, _vm._l(errorArray, function (allErrors, imdex) {
+      return _c("div", {
+        key: imdex
+      }, [_c("span", {
+        staticClass: "text-danger"
+      }, [_vm._v(_vm._s(allErrors) + " ")])]);
+    }), 0);
+  }), 0), _vm._v(" "), _c("form", {
     on: {
       submit: function submit($event) {
         $event.preventDefault();
@@ -5369,6 +5417,7 @@ var render = function render() {
     staticClass: "form-control",
     attrs: {
       type: "number",
+      step: "any",
       placeholder: "Enter price"
     },
     domProps: {
@@ -5412,7 +5461,7 @@ var render = function render() {
     attrs: {
       type: "submit"
     }
-  }, [_vm._v("Subscribe")])]);
+  }, [_vm._v("Subscribe")])])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
