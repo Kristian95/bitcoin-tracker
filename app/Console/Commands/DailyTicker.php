@@ -4,7 +4,11 @@ namespace App\Console\Commands;
 
 use App\Interfaces\BitfinexServiceInterface;
 use App\Interfaces\MarketStateRepositoryInterface;
+use App\Interfaces\SubscribeRepositoryInterface;
+use App\Interfaces\NotificationServiceInterface;
+use Exception;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class DailyTicker extends Command
 {
@@ -37,12 +41,21 @@ class DailyTicker extends Command
      *
      * @return int
      */
-    public function handle(BitfinexServiceInterface $bitfinexService, MarketStateRepositoryInterface $marketStateRepository)
+    public function handle(
+        BitfinexServiceInterface $bitfinexService,
+        MarketStateRepositoryInterface $marketStateRepository,
+        SubscribeRepositoryInterface $subscribeRepository,
+        NotificationServiceInterface $notificationService
+        )
     {
-
-        $tickerData = $bitfinexService->getTickerData();
-        $marketStateRepository->create($tickerData);
-        $this->info('Successfully sent daily quote to everyone.');
-        return 0;
+        try {
+            $tickerData = $bitfinexService->getTickerData();
+            $marketStateRepository->create($tickerData);
+            $subscribers = $subscribeRepository->getSubscribersByPrice($tickerData['last_price']);
+            $notificationService->sendEmail($subscribers);
+            $this->info('Successfully sent daily quote to everyone.');
+        } catch (Exception $exception) {
+            Log::error($exception);
+        }        
     }
 }

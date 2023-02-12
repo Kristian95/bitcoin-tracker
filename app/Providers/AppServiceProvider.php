@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Interfaces\BitfinexServiceInterface;
 use App\Services\BitfinexService;
+use App\Interfaces\NotificationServiceInterface;
+use App\Services\NotificationService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(BitfinexServiceInterface::class, BitfinexService::class);
+        $this->app->bind(NotificationServiceInterface::class, NotificationService::class);
     }
 
     /**
