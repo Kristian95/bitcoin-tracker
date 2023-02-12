@@ -5345,7 +5345,7 @@ chart_js__WEBPACK_IMPORTED_MODULE_1__.Chart.register(chart_js__WEBPACK_IMPORTED_
         response.data.data.forEach(function (element) {
           _this.chartData.datasets.push({
             label: _this.chartData.labels[element.month - 1],
-            backgroundColor: '#f87979',
+            backgroundColor: '#' + Math.floor(Math.random() * 16777215).toString(16),
             data: [element.ask, element.bid, element.high, element.last_price, element.low, element.mid, element.volume]
           });
         });

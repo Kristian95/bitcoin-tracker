@@ -48,7 +48,7 @@ export default {
                 response.data.data.forEach(element => {
                     this.chartData.datasets.push({
                         label: this.chartData.labels[element.month - 1],
-                        backgroundColor: '#f87979',
+                        backgroundColor: '#' + Math.floor(Math.random()*16777215).toString(16),
                         data: [element.ask, element.bid, element.high, element.last_price, element.low, element.mid, element.volume]
                     })
                 });
