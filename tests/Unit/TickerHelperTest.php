@@ -13,8 +13,17 @@ class TickerHelperTest extends TestCase
      *
      * @return void
      */
-    public function test_convertMehod()
+    public function test_array_float()
     {
+        $stringArray = [
+            'mid' => "2232",
+            'bid' => "2232",
+            'ask' => "2232",
+            'last_price' => "2232",
+            'low' => "2232",
+            'high' => "2232",
+            'volume' => "2232",
+        ];
         $stdclass = new stdClass();
         $stdclass->mid = "2232";
         $stdclass->bid = "46.21";
@@ -24,15 +33,11 @@ class TickerHelperTest extends TestCase
         $stdclass->high = "24.66";
         $stdclass->volume = "2.55";
 
-        $data = (new TickerHelper())->convertObjectToArray($stdclass);
+        $data = (new TickerHelper())->castElementToFloat($stringArray);
 
         $this->assertIsArray($data);
-        $this->assertArrayHasKey('mid', $data);
-        $this->assertArrayHasKey('bid', $data);
-        $this->assertArrayHasKey('ask', $data);
-        $this->assertArrayHasKey('last_price', $data);
-        $this->assertArrayHasKey('low', $data);
-        $this->assertArrayHasKey('high', $data);
-        $this->assertArrayHasKey('volume', $data);
+        foreach ($data as $item) {
+            $this->assertTrue(is_float($item));
+        }
     }
 }

@@ -19,8 +19,8 @@ class BitfinexService implements BitfinexServiceInterface
               ],
             ]);
 
-            $data = json_decode($response->getBody()->getContents());
-            return TickerHelper::convertObjectToArray($data);
+            $data = json_decode($response->getBody()->getContents(), true);
+            return TickerHelper::castElementToFloat($data);
         } catch (GuzzleException $exception) {
             Log::error($exception);
             return [];
