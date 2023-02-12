@@ -28,7 +28,7 @@ class SubscribePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'price_limit' => 'required|numeric|max:9999999',
+            'price_limit' => 'required|numeric|max:999999',
             'email' => 'required|email|unique:subscribers,email'
         ];
     }
