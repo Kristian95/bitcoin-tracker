@@ -20,6 +20,7 @@ window.Vue = require('vue').default;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('subscriber-component', require('./components/SubscriberComponent.vue').default);
+Vue.component('bitcoin-chart-component', require('./components/BitcoinChartComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

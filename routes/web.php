@@ -18,3 +18,4 @@ Route::get('/', function () {
 });
 
 Route::post('/subscribe', ['as' => 'subscribe', 'uses' => 'SubscribeController@store']);
+Route::get('/get-data', ['as' => 'get-data', 'uses' => 'MarketStateController@getData']);

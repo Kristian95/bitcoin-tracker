@@ -24,6 +24,7 @@
     <body class="antialiased">
         <div id="app">
             <div class="container">
+                <bitcoin-chart-component></bitcoin-chart-component>
                 <subscriber-component></subscriber-component>
             </div>
         </div>
